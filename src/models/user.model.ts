@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export type UserDocument = mongoose.Document & {
+  birth_date: number;
   gender: string;
   name: string;
   phone: string;
@@ -9,6 +10,7 @@ export type UserDocument = mongoose.Document & {
 
 const userSchema = new mongoose.Schema(
   {
+    birth_date: { type: Number, required: true },
     gender: { type: String, required: true },
     name: { type: String, required: true },
     phone: { type: String, unique: true }

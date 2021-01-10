@@ -6,6 +6,7 @@ import { User } from "../models/user.model";
 export const createUser = (req: Request, res: Response) => {
   try {
     const user = new User();
+    user.birth_date = req.body.birth_date;
     user.gender = req.body.gender;
     user.name = normalizeName(req.body.name);
     user.phone = req.body.phone.replace(/ /g, "");
@@ -51,6 +52,7 @@ export const updateUser = (req: Request, res: Response) => {
     User.findByIdAndUpdate(
       req.params.id,
       {
+        birth_date: req.body.birth_date,
         gender: req.body.gender,
         name: normalizeName(req.body.name),
         phone: req.body.phone.replace(/ /g, "")
