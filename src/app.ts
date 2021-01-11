@@ -4,7 +4,6 @@ import compression from "compression";
 import express from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
-// import nodeHtmlToImage from "node-html-to-image";
 
 import { createUser, listUsers, removeUser, retrieveUser, updateUser } from "./controllers/user.controller";
 import { MONGODB_URI } from "./util/secrets";
@@ -18,10 +17,10 @@ const mongoUrl = MONGODB_URI;
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
-    console.log("MongoDB connection success.");
+    console.log("MONGODB: Connection success.");
   })
   .catch(error => {
-    console.log(`MongoDB connection error. Please make sure MongoDB is running. ${error}`);
+    console.log(`MONGODB: Connection error. ${error}`);
     // process.exit();
   });
 
@@ -29,21 +28,6 @@ app.set("port", process.env.PORT || 3000);
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// app.get("/", (req, res) => {
-//   nodeHtmlToImage({
-//     html: "<html><body>Hello World!</body></html>",
-//     output: "./image.png",
-//     puppeteerArgs: { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
-//   })
-//     .then(() => {
-//       res.send("👋🌎!");
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.send("👋🌎!");
-//     });
-// });
 
 app
   .route("/users")
